@@ -55,3 +55,10 @@ class OrderSerializer(serializers.ModelSerializer):
             'items',
             'total_price',
         )
+
+# Working with Aggregated Data
+class ProductInfoSerializer(serializers.Serializer):
+    # get all products, count of products, max price
+    products = ProductSerializer(many=True)
+    count    = serializers.IntegerField()
+    max_price = serializers.FloatField() 
