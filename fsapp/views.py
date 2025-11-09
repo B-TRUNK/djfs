@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 #serializing
 
 # 1 - Typical Jsonresponse
-def products_list(request):
+def product_list(request):
     products = Product.objects.all()
     serializer = ProductSerializer(products, many = True)
     return JsonResponse({
@@ -19,18 +19,23 @@ def products_list(request):
 
 # 2 - fbv Class
 @api_view(['GET'])
-def products_list(request):
+def product_list(request):
     products = Product.objects.all()
     serializer = ProductSerializer(products, many = True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def product_details(request, pk): #get a single_products
+def product_detail(request, pk): #get a single_products
     product = get_object_or_404(Product, id=pk)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 
 
-
+# 2 - fbv Class
+@api_view(['GET'])
+def order_list(request):
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many = True)
+    return Response(serializer.data)
 
 
