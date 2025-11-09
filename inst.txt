@@ -64,3 +64,11 @@ Working with DOT
 
 - python manage.py graph_models fsapp > models.dot
 - (env) btrunk@lnxmje:~/Downloads/djfs/djfs$ dot -Tpng models.dot -o models.png
+
+========================================================================
+
+Working with Serializers:
+=========================
+1 - in your app create the serializers.py containing corresponding models serializers
+2 - in views add the methods & request headers
+3 - modify your URLs 

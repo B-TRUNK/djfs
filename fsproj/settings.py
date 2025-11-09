@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'fsapp.apps.FsappConfig',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
