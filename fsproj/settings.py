@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'fsapp.apps.FsappConfig',
     'django_extensions',
     'rest_framework',
+    'silk',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Silk Package Middleware
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'fsproj.urls'
@@ -65,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Silk
+                'django.template.context_processors.request',
             ],
         },
     },

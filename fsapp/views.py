@@ -37,7 +37,11 @@ def product_detail(request, pk): #get a single_products
 # 2 - fbv Class
 @api_view(['GET'])
 def order_list(request):
-    orders = Order.objects.all()
+    # Old Query wich is heavy enough
+    #orders = Order.objects.all()
+    # New Optimized Query
+    #orders = Order.objects.prefetch_related('items').all()
+    orders = Order.objects.prefetch_related('items', 'items__product')
     serializer = OrderSerializer(orders, many = True)
     return Response(serializer.data)
 

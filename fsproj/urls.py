@@ -20,4 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fsapp.urls')),
+    # Silk
+    path('silk/', include('silk.urls', namespace='silk')),
 ]

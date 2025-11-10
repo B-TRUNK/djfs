@@ -72,3 +72,15 @@ Working with Serializers:
 1 - in your app create the serializers.py containing corresponding models serializers
 2 - in views add the methods & request headers
 3 - modify your URLs 
+
+========================================================================
+
+Working with silk for profiling: "https://github.com/jazzband/django-silk"
+==========================================================================
+
+- pip install django-silk
+- add to middle_warre : 'silk.middleware.SilkyMiddleware',
+- settings.py -> middleware -> 'silk.middleware.SilkyMiddleware',
+- settings.py -> TEMPLATES -> 'django.template.context_processors.request',
+- settings.urls -> urlpatterns -> path('silk/', include('silk.urls', namespace='silk')),
+- refresh your endpoints on browser and they will auto appear in your_site/silk
