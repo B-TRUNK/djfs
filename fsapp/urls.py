@@ -22,6 +22,6 @@ urlpatterns = [
     path('products/gen/<int:pk>/', views.ProductDetailAPIView.as_view()),
     #path('products/gen/<int:product_id>/', views.ProductDetailAPIView.as_view()),
     #4.3 Self Orders
-    path('my-orders/', views.UserOrderListAPIView.as_view()),
+    path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
 
 ]

@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'silk.middleware.SilkyMiddleware',
 ]
 
+
 ROOT_URLCONF = 'fsproj.urls'
 
 TEMPLATES = [
