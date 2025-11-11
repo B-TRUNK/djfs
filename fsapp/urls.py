@@ -16,7 +16,7 @@ urlpatterns = [
 
     #4 CBV - Generics
     #4.1 Get All Products by Generic Class Based
-    path('products/gen/', views.ProductsListAPIView.as_view()),
+    path('products/gen/', views.ProductListCreateAPIView.as_view()),
     path('orders/gen/', views.OrdersListAPIView.as_view()),
     #4.2 Get a specific Product
     path('products/gen/<int:pk>/', views.ProductDetailAPIView.as_view()),
