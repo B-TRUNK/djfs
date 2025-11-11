@@ -23,5 +23,7 @@ urlpatterns = [
     #path('products/gen/<int:product_id>/', views.ProductDetailAPIView.as_view()),
     #4.3 Self Orders
     path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
+    #5 - APIView
+    path('products/apiv/', views.ProductInfoAPIView.as_view()),
 
 ]
