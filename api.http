@@ -1,16 +1,24 @@
 GET http://127.0.0.1:8000/products/gen/ HTTP/1.1
 
+
 ###
 POST http://127.0.0.1:8000/products/gen/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYyOTU3OTIyLCJpYXQiOjE3NjI5NTc2MjIsImp0aSI6IjRjMjg5N2JkMTcxZjQxZjY5YjkzYTExZjY1N2Q3MmY1IiwidXNlcl9pZCI6IjIifQ.onav29T5amKkQpN0joXJ2kGSbcAAMH20XKdAkB6SMhg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYyOTY0MTM4LCJpYXQiOjE3NjI5NjQwNzgsImp0aSI6ImY0NTQ4NzNmMjQzYTQxZDU5OTkyNmM5NzUzYWE1ZmUzIiwidXNlcl9pZCI6IjEifQ.cyPoZiK0PzDCL5t1xEnF9vf3TULV_QxYO_DMxmB1itM
 
 {
-    "description": "Electronics",
-    "name": "Air Conditioner",
-    "price": "22000.99",
+    "description": "Automobile",
+    "name": "Ford-Raptor",
+    "price": "172.99",
     "stock": 1
 }
+
+
+###
+# Authenticated to show self.orders
+GET http://127.0.0.1:8000/my-orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MzA1MDE5OSwiaWF0IjoxNzYyOTYzNzk5LCJqdGkiOiI0NWM4Nzc2NzYyYTE0NDI0YTk0MzgzM2U5OWQyNmE3OCIsInVzZXJfaWQiOiIxIn0.YYDlz6R7wRkha6OspnouqIkAMc246MBfSErf8yu3rJ0
+
 
 ###
 #Testing Simple-JWT
@@ -18,11 +26,15 @@ POST http://127.0.0.1:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "user",
-    "password": "1234"
+    "username": "admin",
+    "password": "test"
 }
 
 ###
-# Authenticated to show self.orders
-GET http://127.0.0.1:8000/my-orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYyOTU4MTk4LCJpYXQiOjE3NjI5NTc4OTgsImp0aSI6IjUxMDlhZmMwYTM2MTQzYzdhYzA4YTgzNjVlNjk0MTk1IiwidXNlcl9pZCI6IjIifQ.UjFw8KwOneFbgPanZL2nsVdGHWrad4rzkQPnttILbeY
+#Testing Simple-JWT = Token Refresh
+POST http://127.0.0.1:8000/api/token/refresh/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MzA1MDE5OSwiaWF0IjoxNzYyOTYzNzk5LCJqdGkiOiI0NWM4Nzc2NzYyYTE0NDI0YTk0MzgzM2U5OWQyNmE3OCIsInVzZXJfaWQiOiIxIn0.YYDlz6R7wRkha6OspnouqIkAMc246MBfSErf8yu3rJ0"
+}
