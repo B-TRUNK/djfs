@@ -91,3 +91,16 @@ Working with simple_jwt :
 =========================
 https://github.com/jazzband/djangorestframework-simplejwt ->
 https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+
+==========================================================================
+
+Working with API Documentation:
+===============================
+https://github.com/tfranzel/drf-spectacular
+https://drf-spectacular.readthedocs.io/en/latest/
+
+- python manage.py spectacular --color --file schema.yml
+- http://127.0.0.1:8000/api/schema/redoc/
+- http://127.0.0.1:8000/api/schema/swagger-ui/
+
+==========================================================================
