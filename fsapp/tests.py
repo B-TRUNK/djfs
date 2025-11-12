@@ -28,7 +28,7 @@ class UserOrderTestCase(TestCase):
 
     def test_user_order_list_authenticated(self):
         response = self.client.get(reverse('user_orders'))
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 # run test: manage.py test

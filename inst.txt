@@ -84,3 +84,10 @@ Working with silk for profiling: "https://github.com/jazzband/django-silk"
 - settings.py -> TEMPLATES -> 'django.template.context_processors.request',
 - settings.urls -> urlpatterns -> path('silk/', include('silk.urls', namespace='silk')),
 - refresh your endpoints on browser and they will auto appear in your_site/silk
+
+==========================================================================
+
+Working with simple_jwt : 
+=========================
+https://github.com/jazzband/djangorestframework-simplejwt ->
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/

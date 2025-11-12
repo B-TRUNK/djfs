@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'silk',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Set User Model
 AUTH_USER_MODEL = 'fsapp.User'
+
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication', #Highest priority  
+        'rest_framework.authentication.SessionAuthentication',
+
+    ]
+
+}

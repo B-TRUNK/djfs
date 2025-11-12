@@ -1,6 +1,12 @@
 from django.urls import path, include
 from . import views
 
+# Simple-JWT
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 urlpatterns = [
 
     #1 json response
@@ -25,5 +31,10 @@ urlpatterns = [
     path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
     #5 - APIView
     path('products/apiv/', views.ProductInfoAPIView.as_view()),
+
+
+    #Adding Simple-JWT Routes
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
