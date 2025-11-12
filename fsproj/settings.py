@@ -151,5 +151,5 @@ REST_FRAMEWORK = {
 #check https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 #for more settings on JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
 }

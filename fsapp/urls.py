@@ -31,6 +31,8 @@ urlpatterns = [
     path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
     #5 - APIView
     path('products/apiv/', views.ProductInfoAPIView.as_view()),
+    #6 Update/Delete APIView
+    path('products/apiv/<int:pk>/', views.ProductUpdateDestroyAPIView.as_view()),
 
 
     #Adding Simple-JWT Routes
