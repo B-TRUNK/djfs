@@ -104,3 +104,10 @@ https://drf-spectacular.readthedocs.io/en/latest/
 - http://127.0.0.1:8000/api/schema/swagger-ui/
 
 ==========================================================================
+
+Working With Backend Filters : https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
+=============================================================================================================
+
+- pip install django-filter
+- in settings-> add to INSTALLED_APPS -> 'django_filters',
+- add globally or locally

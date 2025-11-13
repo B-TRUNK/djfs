@@ -15,7 +15,9 @@ from rest_framework import generics
 from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser)
 # 5
 from rest_framework.views import APIView
-
+# Backend Filter
+from django_filters import rest_framework as filters
+from fsapp.filters import ProductFilter
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -82,6 +84,7 @@ class OrdersListAPIView(generics.ListAPIView):
     queryset = Order.objects.prefetch_related('items', 'items__product')
     serializer_class = OrderSerializer
 
+
 # 4.3 Get Only Self Orders (per user!)
 class UserOrderListAPIView(generics.ListAPIView):
     queryset = Order.objects.prefetch_related('items', 'items__product')
@@ -108,7 +111,8 @@ class ProductInfoAPIView(APIView):
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    
+    filterset_class = ProductFilter
+
     def get_permissions(self):
         self.permission_classes = [AllowAny]
         #if self.request.method == 'POST':
