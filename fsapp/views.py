@@ -19,6 +19,8 @@ from rest_framework.views import APIView
 from fsapp.filters import ProductFilter, InStockCustomFilterBackend
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+#Applying Pagination
+from fsapp.pagination import LargeResultsSetPagination
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -121,6 +123,8 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
         ]
     search_fields   = ['name', 'description']
     ordering_fields = ['name', 'price', 'stock']
+    pagination_class = LargeResultsSetPagination
+    pagination_class.page_size = 4
     
 
     def get_permissions(self):
