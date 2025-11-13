@@ -16,8 +16,9 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser)
 # 5
 from rest_framework.views import APIView
 # Backend Filter
-from django_filters import rest_framework as filters
-from fsapp.filters import ProductFilter
+from fsapp.filters import ProductFilter, InStockCustomFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -112,6 +113,15 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+        InStockCustomFilterBackend,
+        ]
+    search_fields   = ['name', 'description']
+    ordering_fields = ['name', 'price', 'stock']
+    
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
