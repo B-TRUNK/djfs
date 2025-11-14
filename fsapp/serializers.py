@@ -63,3 +63,57 @@ class ProductInfoSerializer(serializers.Serializer):
     products = ProductSerializer(many=True)
     count    = serializers.IntegerField()
     max_price = serializers.FloatField() 
+
+
+# Advanced Serialization
+"""
+when submitting a POST for orders, we get a respone of empty 
+feedback [], note the following so our mission is to fill the gap
+
+{
+  "order_id": "ea55e71b-9f6c-437d-809d-7deb39894231",
+  "created_at": "2025-11-14T22:40:21.210896Z",
+  "user": 1,
+  "status": "Confirmed",
+  "items": [],
+  "total_price": 0
+}
+* Notice the nested serializer below
+* even after this serializer selection decision is added to the 'orders' viewset
+you will still get:
+*AssertionError: The `.create()` method does not support writable nested fields by default.
+*Write an explicit `.create()` method for serializer `fsapp.serializers.OrderCreateSerializer`,
+*or set `read_only=True` on nested serializer fields."""
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class OrderItemCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = OrderItem
+            fields = ['product', 'quantity']
+    
+    order_id = serializers.UUIDField(read_only=True)
+    items = OrderItemCreateSerializer(many=True)
+
+    #Explicit create def
+    def create(self, validated_data):
+        orderitem_data = validated_data.pop('items') 
+        order = Order.objects.create(**validated_data)
+
+        for item in orderitem_data:
+            OrderItem.objects.create(order=order, **item)
+
+        return order
+
+    class Meta:
+        model = Order
+        fields = (
+            'order_id',
+            'user',
+            'status',
+            'items',
+        )
+        #in order to inject the userId to feedback response as a read only field
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
+

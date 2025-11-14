@@ -42,8 +42,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 
 PUT http://127.0.0.1:8000/products/apiv/22/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYyOTY3MTgwLCJpYXQiOjE3NjI5NjY4ODAsImp0aSI6IjhjOTk1ZTg3ZWM1NjQyNDhiODczNTE4NTY1NzQ2ZGQ5IiwidXNlcl9pZCI6IjEifQ.YZ-Wn_9DxEB0KNziY8ptR4hDxCXrm4H7RPmRGCqyk6U
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY0NDI4LCJpYXQiOjE3NjMxNjQxMjgsImp0aSI6IjkyOThjNDVhMjYyMDQxMzg5NmIyZTE5M2IwYzNhMWJkIiwidXNlcl9pZCI6IjEifQ.mnJDHoa9vdi0gYHWKIp-yndaxqGAaIvuUDPBg_cZb4g
 {
     "description": "Clothes",
     "name": "Gloves",
@@ -56,6 +55,23 @@ DELETE http://127.0.0.1:8000/products/apiv/22/ HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYyOTY3MTgwLCJpYXQiOjE3NjI5NjY4ODAsImp0aSI6IjhjOTk1ZTg3ZWM1NjQyNDhiODczNTE4NTY1NzQ2ZGQ5IiwidXNlcl9pZCI6IjEifQ.YZ-Wn_9DxEB0KNziY8ptR4hDxCXrm4H7RPmRGCqyk6U
 
 ###
+POST http://127.0.0.1:8000/orders/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY0ODgzLCJpYXQiOjE3NjMxNjQ1ODMsImp0aSI6IjEwYWQ4OGE0NmFhZjQ2OGE4NzkzZmZmZmRlMWEyYmE5IiwidXNlcl9pZCI6IjEifQ.XVlEqIhdcAISbYB5nhcF68fv8liqsRUXSPykhG4sod8
 
+
+{
+    "status": "Confirmed",
+    "items": [
+        {
+            "product": 3,
+            "quantity": 1
+        },
+        {
+            "product": 3,
+            "quantity": 3
+        }
+    ]
+}
 
 

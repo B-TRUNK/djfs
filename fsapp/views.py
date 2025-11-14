@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 #3
-from .serializers import ProductInfoSerializer
+from fsapp.serializers import ProductInfoSerializer, OrderCreateSerializer
 from django.db.models import Max
 #4
 from rest_framework import generics
@@ -153,12 +153,30 @@ class OrderViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     #query_for -> ?created_at_lt__2024-11-11
 
+
     #user only retrieve/update/delete their own orders, admins have full access
     def get_queryset(self):
         qs =  super().get_queryset()
         if not self.request.user.is_staff:
             qs = qs.filter(user=self.request.user)
         return qs
+    
+    # below def is to decide wich serializer to use when creating order
+    def get_serializer_class(self):
+        # you can also use -> if self.request.method == 'POST':
+        if self.action == 'create':
+            return OrderCreateSerializer
+        return super().get_serializer_class()
+    
+    """to inject additional fields to the request (user ID as an example when POST)
+        then add:
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
+        to the end of the meta class of the serializer
+    """
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
     # @action(detail=False, methods=['get'], url_path='user-orders')
