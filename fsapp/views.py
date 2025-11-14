@@ -21,6 +21,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 #Applying Pagination
 from fsapp.pagination import LargeResultsSetPagination
+#6
+from rest_framework import viewsets
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -83,20 +85,20 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     # Optional look-up keyword
     #lookup_url_kwarg = 'product_id'
 
-class OrdersListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items', 'items__product')
-    serializer_class = OrderSerializer
+# class OrdersListAPIView(generics.ListAPIView):
+#     queryset = Order.objects.prefetch_related('items', 'items__product')
+#     serializer_class = OrderSerializer
 
 
 # 4.3 Get Only Self Orders (per user!)
-class UserOrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items', 'items__product')
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+# class UserOrderListAPIView(generics.ListAPIView):
+#     queryset = Order.objects.prefetch_related('items', 'items__product')
+#     serializer_class = OrderSerializer
+#     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(user=self.request.user)
+#     def get_queryset(self):
+#         qs = super().get_queryset()
+#         return qs.filter(user=self.request.user)
     
 # 5 - APIViews
 class ProductInfoAPIView(APIView):
@@ -138,3 +140,10 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 class ProductUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+# 6 - Viewsets
+class OrderViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.prefetch_related('items__product')
+

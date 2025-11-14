@@ -1,12 +1,16 @@
 from django.urls import path, include
 from . import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from rest_framework.routers import DefaultRouter
+from fsapp.views import OrderViewSet
+
 
 # Simple-JWT
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
 
 urlpatterns = [
 
@@ -16,7 +20,7 @@ urlpatterns = [
     #2 fbv
     path('products/', views.product_list),
     path('products/<int:pk>/', views.product_detail),
-    path('orders/', views.order_list),
+    #path('orders/', views.order_list),
 
     #3 Aggregated Data
     path('products/info/', views.product_info),
@@ -24,12 +28,12 @@ urlpatterns = [
     #4 CBV - Generics
     #4.1 Get All Products by Generic Class Based
     path('products/gen/', views.ProductListCreateAPIView.as_view()),
-    path('orders/gen/', views.OrdersListAPIView.as_view()),
+    #path('orders/gen/', views.OrdersListAPIView.as_view()),
+    #4.3 Self Orders
+    #path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
     #4.2 Get a specific Product
     path('products/gen/<int:pk>/', views.ProductDetailAPIView.as_view()),
     #path('products/gen/<int:product_id>/', views.ProductDetailAPIView.as_view()),
-    #4.3 Self Orders
-    path('my-orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
     #5 - APIView
     path('products/apiv/', views.ProductInfoAPIView.as_view()),
     #6 Update/Delete APIView
@@ -47,3 +51,8 @@ urlpatterns = [
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
 ]
+
+# Viewsets Routers
+router = DefaultRouter()
+router.register('orders', views.OrderViewSet)
+urlpatterns += router.urls
