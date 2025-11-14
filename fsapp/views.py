@@ -16,13 +16,14 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser)
 # 5
 from rest_framework.views import APIView
 # Backend Filter
-from fsapp.filters import ProductFilter, InStockCustomFilterBackend
+from fsapp.filters import ProductFilter, InStockCustomFilterBackend, OrderFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 #Applying Pagination
 from fsapp.pagination import LargeResultsSetPagination
 #6
 from rest_framework import viewsets
+from rest_framework.decorators import action
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -146,4 +147,15 @@ class ProductUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.prefetch_related('items__product')
+    permission_classes = [IsAuthenticated]
+    pagination_class = None
+    filterset_class = OrderFilter
+    filter_backends = [DjangoFilterBackend]
+    #query_for -> ?created_at_lt__2024-11-11
+
+    @action(detail=False, methods=['get'], url_path='user-orders')
+    def user_orders(self, request):
+        orders = self.get_queryset().filter(user=request.user)
+        serializer = self.get_serializer(orders, many=True)
+        return Response(serializer.data)
 
