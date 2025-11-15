@@ -27,6 +27,7 @@ from rest_framework.decorators import action
 #7 -  Caching
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -166,6 +167,18 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
     #query_for -> ?created_at_lt__2024-11-11
+
+    #Caching
+    @method_decorator(cache_page(60 * 15 ,key_prefix='order_list'))
+    @method_decorator(vary_on_headers("Authorization"))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    """
+    we have an issue here as when a user is authenticated with his own access
+    and another user is logging with his own access key later, the earlier 
+    results will be cached to the second user! so we will rely on Authorization key
+    and another decorator according to the DRF Documentation (cache_page)
+    """
 
 
     #user only retrieve/update/delete their own orders, admins have full access

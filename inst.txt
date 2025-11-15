@@ -117,6 +117,9 @@ Working With Backend Filters : https://www.django-rest-framework.org/api-guide/f
 Working with Redis: https://hub.docker.com/_/redis
 ==================================================
 
+@Phase_1
+--------
+
 - docker run --name django-redis -d -p 6379:6379 --rm redis
     you must get a container id like: ca27a1d3f11a8cd109f45a10e60fadf7d572b0f3c38c6aa2c76e4e1b05e3d386
 
@@ -151,4 +154,8 @@ Working with Redis: https://hub.docker.com/_/redis
             -> now you should get all active caches ,pick any:
             - get ":1:views.decorators.cache.cache_header.product_list.736ebdd50aa7210857d070207475dcb8.en-us.UTC"
 
+@Phase 2: vary headers
+----------------------
 
+- https://docs.djangoproject.com/en/5.2/topics/http/decorators/#vary-headers
+https://docs.djangoproject.com/en/5.2/topics/cache/#using-vary-headers
