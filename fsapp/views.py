@@ -24,6 +24,9 @@ from fsapp.pagination import LargeResultsSetPagination
 #6
 from rest_framework import viewsets
 from rest_framework.decorators import action
+#7 -  Caching
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -128,7 +131,18 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     ordering_fields = ['name', 'price', 'stock']
     pagination_class = LargeResultsSetPagination
     pagination_class.page_size = 4
+
+    #Caching
+    @method_decorator(cache_page(60 * 15 ,key_prefix='product_list'))
+
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
     
+    def get_queryset(self):
+        import time
+        time.sleep(2)
+        return super().get_queryset()
+
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]

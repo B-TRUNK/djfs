@@ -111,3 +111,44 @@ Working With Backend Filters : https://www.django-rest-framework.org/api-guide/f
 - pip install django-filter
 - in settings-> add to INSTALLED_APPS -> 'django_filters',
 - add globally or locally
+
+==========================================================================================
+
+Working with Redis: https://hub.docker.com/_/redis
+==================================================
+
+- docker run --name django-redis -d -p 6379:6379 --rm redis
+    you must get a container id like: ca27a1d3f11a8cd109f45a10e60fadf7d572b0f3c38c6aa2c76e4e1b05e3d386
+
+- docker ps
+
+- https://github.com/redis/redis-py
+    pip install "redis[hiredis]"
+
+- https://docs.djangoproject.com/en/5.2/topics/cache/
+    check for info
+
+- https://github.com/jazzband/django-redis
+    
+    - pip install django-redis
+    - in settings.py ->
+    CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+- after adding caching_decorator, signals, app.py register:
+    - docker ps
+        -> pick the redis container id
+    - docker exec -ti ca27a1d3f11a bash
+        - root@ca27a1d3f11a:/data# redis-cli -n 1
+        - 127.0.0.1:6379[1]> KEYS *
+            -> now you should get all active caches ,pick any:
+            - get ":1:views.decorators.cache.cache_header.product_list.736ebdd50aa7210857d070207475dcb8.en-us.UTC"
+
+
