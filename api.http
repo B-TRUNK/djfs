@@ -57,21 +57,49 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ###
 POST http://127.0.0.1:8000/orders/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY0ODgzLCJpYXQiOjE3NjMxNjQ1ODMsImp0aSI6IjEwYWQ4OGE0NmFhZjQ2OGE4NzkzZmZmZmRlMWEyYmE5IiwidXNlcl9pZCI6IjEifQ.XVlEqIhdcAISbYB5nhcF68fv8liqsRUXSPykhG4sod8
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY2NjA3LCJpYXQiOjE3NjMxNjYzMDcsImp0aSI6ImE5Y2Q3N2NkYTFlNTRjOGQ5ZGFiODRlYjg2NzViOGRhIiwidXNlcl9pZCI6IjEifQ.4h6aBq1m3jykOD4LM_Go87iglYxnqbxNXTxNh0llROQ
 
 {
-    "status": "Confirmed",
+    "status": "Pending",
     "items": [
         {
-            "product": 3,
-            "quantity": 1
+            "product": 2,
+            "quantity": 2
         },
         {
-            "product": 3,
-            "quantity": 3
+            "product": 2,
+            "quantity": 2
         }
     ]
 }
+
+###
+PUT http://127.0.0.1:8000/orders/ec239f22-1314-44bd-95cb-54a1d1a5d55c/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY3NDAxLCJpYXQiOjE3NjMxNjcxMDEsImp0aSI6IjA2YWU2M2ZmNDA4NzQ0YTE5OGY0NThmNDc0NDE3ZmI3IiwidXNlcl9pZCI6IjEifQ.59QCpq0b3qcB3cqzk3r_S8JWDk4BFRCiy7YzxRi3uXo
+
+
+{
+    "status": "Pending",
+    "items": [
+        {
+            "product": 2,
+            "quantity": 2
+        },
+        {
+            "product": 2,
+            "quantity": 2
+        }
+    ]
+}
+
+###
+DELETE http://127.0.0.1:8000/orders/ea55e71b-9f6c-437d-809d-7deb39894231/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY4MDU1LCJpYXQiOjE3NjMxNjc3NTUsImp0aSI6IjA3OTEzMWU5MGFhODRhOTM5MzlkZDhhZDU2YmYyZWRlIiwidXNlcl9pZCI6IjEifQ.vMaskS1FzB5-g97HfQgWrnkA2m7ob4G0hZ_x-8afhm8
+
+###
+get http://127.0.0.1:8000/orders/ea55e71b-9f6c-437d-809d-7deb39894231/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY4MDU1LCJpYXQiOjE3NjMxNjc3NTUsImp0aSI6IjA3OTEzMWU5MGFhODRhOTM5MzlkZDhhZDU2YmYyZWRlIiwidXNlcl9pZCI6IjEifQ.vMaskS1FzB5-g97HfQgWrnkA2m7ob4G0hZ_x-8afhm8
+
 
 
