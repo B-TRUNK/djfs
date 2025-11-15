@@ -147,8 +147,23 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication', #Highest priority  
         'rest_framework.authentication.SessionAuthentication',
         
-
     ],
+
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        #'fsapp.throttles.BurstRateThrottle',
+        #'fsapp.throttles.SustainedRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
+
+        
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/minute',
+        #'burst': '5/minute',
+        #'sustained': '15/hour',
+        'products': '5/minute',
+        'orders': '6/minute',
+    },
 
     #drf-spectacular
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',

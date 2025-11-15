@@ -120,7 +120,7 @@ Working with Redis: https://hub.docker.com/_/redis
 @Phase_1
 --------
 
-- docker run --name django-redis -d -p 6379:6379 --rm redis
+- docker run --name django-redis -d -p 6379:6379 redis
     you must get a container id like: ca27a1d3f11a8cd109f45a10e60fadf7d572b0f3c38c6aa2c76e4e1b05e3d386
 
 - docker ps

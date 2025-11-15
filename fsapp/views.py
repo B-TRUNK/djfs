@@ -28,6 +28,8 @@ from rest_framework.decorators import action
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+#8 - Local Throttle identification
+from rest_framework.throttling import ScopedRateThrottle
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -119,6 +121,8 @@ class ProductInfoAPIView(APIView):
 
 # Create a POST APIView
 class ProductListCreateAPIView(generics.ListCreateAPIView):
+    throttle_scope = 'products' #gloabally in settings.py
+    throttle_classes = [ScopedRateThrottle] #locally and specifically
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
@@ -160,6 +164,7 @@ class ProductUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 # 6 - Viewsets
 class OrderViewSet(viewsets.ModelViewSet):
+    throttle_scope = 'orders'
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -179,8 +184,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     results will be cached to the second user! so we will rely on Authorization key
     and another decorator according to the DRF Documentation (cache_page)
     """
-
-
     #user only retrieve/update/delete their own orders, admins have full access
     def get_queryset(self):
         qs =  super().get_queryset()
