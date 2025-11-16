@@ -215,3 +215,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     #     serializer = self.get_serializer(orders, many=True)
     #     return Response(serializer.data)
 
+# A View Created Specifically for a testcase
+class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_url_kwarg = 'product_id'
+
+    def get_permissions(self):
+        self.permission_classes = [AllowAny]
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            self.permission_classes = [IsAdminUser]
+        return super().get_permissions()
