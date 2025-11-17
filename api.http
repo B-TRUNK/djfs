@@ -3,7 +3,7 @@ POST http://127.0.0.1:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "mod",
+    "username": "abanoub",
     "password": "1234"
 }
 
@@ -63,18 +63,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ###
 POST http://127.0.0.1:8000/orders/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY2NjA3LCJpYXQiOjE3NjMxNjYzMDcsImp0aSI6ImE5Y2Q3N2NkYTFlNTRjOGQ5ZGFiODRlYjg2NzViOGRhIiwidXNlcl9pZCI6IjEifQ.4h6aBq1m3jykOD4LM_Go87iglYxnqbxNXTxNh0llROQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMzgxMjM4LCJpYXQiOjE3NjMzNzc2MzgsImp0aSI6IjNlMDc2MmQwYmY2YzRhY2JhNDYwN2ZjZjk2YTExMjBlIiwidXNlcl9pZCI6IjgifQ.Ziv8A8tHtvsDUMXgC3N0hacGz7u_G64W5H3b7I5uYmw
+
 
 {
-    "status": "Pending",
+    "status": "Confirmed",
     "items": [
         {
-            "product": 2,
-            "quantity": 2
+            "product": 1,
+            "quantity": 1
         },
         {
-            "product": 2,
-            "quantity": 2
+            "product": 1,
+            "quantity": 3
         }
     ]
 }

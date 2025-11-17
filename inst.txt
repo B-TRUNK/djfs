@@ -159,3 +159,14 @@ Working with Redis: https://hub.docker.com/_/redis
 
 - https://docs.djangoproject.com/en/5.2/topics/http/decorators/#vary-headers
 https://docs.djangoproject.com/en/5.2/topics/cache/#using-vary-headers
+
+==========================================================================================
+
+Working With Celery: https://github.com/celery/celery
+=====================================================
+
+- configure needed files
+- run server
+- make sure docker redis is working
+- on another terminal : celery -A fsproj worker --loglevel=INFO
+- create new order & check result

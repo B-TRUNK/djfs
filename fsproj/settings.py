@@ -199,3 +199,16 @@ CACHES = {
         }
     }
 }
+
+# tells celery about Redis - same URL as 
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "sandbox.smtp.mailtrap.io"
+EMAIL_HOST_USER = "0086177cbbf933"
+EMAIL_HOST_PASSWORD = "d2a3b404cc6d3e"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+#DEFAULT_FROM_EMAIL = "no-reply@yourapp.test"

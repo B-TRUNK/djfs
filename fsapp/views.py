@@ -30,6 +30,8 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 #8 - Local Throttle identification
 from rest_framework.throttling import ScopedRateThrottle
+#9 Send Email
+from fsapp.tasks import send_order_confirmation_email
 
 #serializing
 # 1 - Typical Jsonresponse
@@ -206,7 +208,10 @@ class OrderViewSet(viewsets.ModelViewSet):
         to the end of the meta class of the serializer
     """
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        #serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        # configure email sending schedule
+        send_order_confirmation_email.delay(order.order_id, self.request.user.email)
 
 
     # @action(detail=False, methods=['get'], url_path='user-orders')
