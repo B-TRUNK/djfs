@@ -109,4 +109,49 @@ get http://127.0.0.1:8000/orders/ea55e71b-9f6c-437d-809d-7deb39894231/ HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzMTY4MDU1LCJpYXQiOjE3NjMxNjc3NTUsImp0aSI6IjA3OTEzMWU5MGFhODRhOTM5MzlkZDhhZDU2YmYyZWRlIiwidXNlcl9pZCI6IjEifQ.vMaskS1FzB5-g97HfQgWrnkA2m7ob4G0hZ_x-8afhm8
 
 
+########################################################################################
 
+#------
+#Djoser
+#------
+
+###
+
+GET http://localhost:8000/auth/users/me/ HTTP/1.1
+#Authorization: Token 0b50022224ab0bd241cc3f517bc2f3b455fc8fc0
+Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzNDAxMzY3LCJpYXQiOjE3NjMzOTc3NjcsImp0aSI6IjgyZjJmY2I0N2U0YTRjZGU4ZmY3NDM1MDUxNzQ0Njg1IiwidXNlcl9pZCI6IjEifQ.vn9LH4IvR2PruNk4y0fwLemN8U4T35xtDAr6H1MGvRI
+
+
+###
+POST http://localhost:8000/auth/token/login/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test"
+}
+
+###
+POST http://localhost:8000/auth/token/logout/ HTTP/1.1
+Authorization: Token 0b50022224ab0bd241cc3f517bc2f3b455fc8fc0
+
+#----------
+#Djoser JWT
+#----------
+
+###
+POST http://localhost:8000/auth/jwt/create/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test"
+}
+
+###
+POST http://localhost:8000/auth/jwt/refresh/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MzQ4NDQ5NiwiaWF0IjoxNzYzMzk4MDk2LCJqdGkiOiIzYzEyMWM0MjMwOTE0YTk5YWQ4YzgyNTE0MjNkODljNiIsInVzZXJfaWQiOiIxIn0.Fdtf4dAkZTRP9ObKf0KERZdHdyaiLE01iYfWKr1s2p4"
+}

@@ -120,6 +120,8 @@ Working with Redis: https://hub.docker.com/_/redis
 @Phase_1
 --------
 
+- docker rm django-redis to clear prev cache
+
 - docker run --name django-redis -d -p 6379:6379 redis
     you must get a container id like: ca27a1d3f11a8cd109f45a10e60fadf7d572b0f3c38c6aa2c76e4e1b05e3d386
 
@@ -170,3 +172,28 @@ Working With Celery: https://github.com/celery/celery
 - make sure docker redis is working
 - on another terminal : celery -A fsproj worker --loglevel=INFO
 - create new order & check result
+
+Working With Djoser : https://github.com/sunscrapers/djoser
+===========================================================
+
+- pip install djoser
+- pip install djangorestframework django-cors-headers
+
+- add to settings.py ->
+    'rest_framework.authtoken',
+    'djoser',
+    'corsheaders',
+
+# Corsheaders
+- https://pypi.org/project/django-cors-headers/
+- add the middleware https://pypi.org/project/django-cors-headers/ to settings.py
+
+- CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", #this is where react app will run
+]
+
+- 'rest_framework.authentication.TokenAuthentication',
+- migrate - to migrate The AuthToken Package
+- add the url : re_path(r'^auth/', include('djoser.urls')),
+
+

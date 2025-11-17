@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'django_filters',
+    #cors & djoser setup for react
+    'rest_framework.authtoken',
+    'djoser',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Silk Package Middleware
     'silk.middleware.SilkyMiddleware',
+    #corsheaders
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", #this is where react app will run
 ]
 
 
@@ -144,9 +154,9 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
 
-        'rest_framework_simplejwt.authentication.JWTAuthentication', #Highest priority  
+        'rest_framework_simplejwt.authentication.JWTAuthentication', #Highest priority
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        
     ],
 
     'DEFAULT_THROTTLE_CLASSES': [
@@ -154,9 +164,8 @@ REST_FRAMEWORK = {
         #'fsapp.throttles.BurstRateThrottle',
         #'fsapp.throttles.SustainedRateThrottle',
         'rest_framework.throttling.ScopedRateThrottle',
-
-        
     ],
+
     'DEFAULT_THROTTLE_RATES': {
         'anon': '2/minute',
         #'burst': '5/minute',
@@ -178,9 +187,12 @@ REST_FRAMEWORK = {
 #check https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 #for more settings on JWT
 SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',), #Djoser
+    # JWT Token Lifetime
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
 }
+
 
 #Check https://drf-spectacular.readthedocs.io/en/latest/readme.html#installation
 SPECTACULAR_SETTINGS = {
